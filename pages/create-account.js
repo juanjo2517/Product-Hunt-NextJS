@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
+import Router from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Form, DivInput, InputSubmit, Error } from '../components/UI/Form';
 
@@ -17,6 +18,9 @@ const INITIAL_STATE = {
 
 const CreateAccount = () => {
 
+  const [error, saveError] = useState('');
+
+
   const {
     values,
     errors,
@@ -30,8 +34,10 @@ const CreateAccount = () => {
   async function CreateAccount(){
     try {      
       await firebase.register(name, email, password);
+      Router.push('/');
     } catch (error) {
-      console.log('Error al crear el usuario',error);
+      console.log('Error al crear el usuario',error.message);
+      saveError(error.message);
     }
   }
 
@@ -51,7 +57,7 @@ const CreateAccount = () => {
           noValidate
         >
           <DivInput>
-            <label htmlFor="name">Nombre</label>
+            <label htmlFor="name">Nombre: </label>
             <input
               type="text"
               id="name"
@@ -66,7 +72,7 @@ const CreateAccount = () => {
           { errors.name && <Error>{errors.name}</Error> }
           
           <DivInput>
-            <label htmlFor="email">Correo Electronico</label>
+            <label htmlFor="email">Correo Electronico: </label>
             <input
               type="text"
               id="email"
@@ -81,7 +87,7 @@ const CreateAccount = () => {
           { errors.email && <Error>{errors.email}</Error> }
           
           <DivInput>
-            <label htmlFor="password">Contraseña</label>
+            <label htmlFor="password">Contraseña: </label>
             <input
               type="password"
               id="password"
@@ -94,7 +100,7 @@ const CreateAccount = () => {
           </DivInput>
           
           <DivInput>
-            <label htmlFor="password2">Repite Contraseña</label>
+            <label htmlFor="password2">Repite Contraseña: </label>
             <input
               type="password"
               id="password2"
@@ -107,6 +113,8 @@ const CreateAccount = () => {
           </DivInput>
 
           { errors.password && <Error>{errors.password}</Error> }
+
+          {error && <Error>Ya existe un usuario usando este correo.</Error>}
           
           <InputSubmit 
             type="submit"

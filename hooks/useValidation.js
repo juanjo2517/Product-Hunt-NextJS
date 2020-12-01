@@ -9,7 +9,6 @@ const useValidation = (initialState, validate, fn) => {
     useEffect(() => {
         if(submitForm){
             const notErrors = Object.keys(errors).length === 0;
-            console.log('entra error')
 
             if(notErrors) {
                 fn(); //Fn: Funcion que se ejecuta en el componente, puede ser login o lo que sea

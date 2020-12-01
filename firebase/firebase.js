@@ -19,6 +19,16 @@ class Firebase {
         return await newUser.user.updateProfile({
             displayName: name
         });
+    
+    }
+
+    async login(email, password){
+        return this.auth.signInWithEmailAndPassword(email, password);
+    }
+
+    async logout(){
+        console.log('Cerrando...')
+        await this.auth.signOut();
     }
 }
 

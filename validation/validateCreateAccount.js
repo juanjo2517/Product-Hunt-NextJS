@@ -12,7 +12,7 @@ export default function validateCreateAccount(values){
     }
 
     if(!values.password || !values.password2){
-        errors.password = "Las Contraseñas son obligatorias";
+        errors.password = "La Contraseña es obligatoria";
     }else if(values.password !== values.password2){
         errors.password = "Las Contraseñas no coinciden";
     }else if(values.password.length < 6){
