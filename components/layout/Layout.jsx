@@ -36,7 +36,7 @@ const Layout = props => {
                     }
 
                     h1, h2 {
-                        font-family: 'Roboto Slab', serif;
+                        font-family: 'Roboto', serif;
                         font-weight: 700;
                     }
 
